@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   product6: any[] = [];
   category1: any[] = [];
   errormessage: string = '';
-  selectedProductId: number | null = null;
+  // selectedProductId: number | null = null;
 
   constructor(private fb: FormBuilder, private ds: CategService) {
     this.productForm = this.fb.group({
