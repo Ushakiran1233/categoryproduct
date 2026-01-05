@@ -1,0 +1,106 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="productName">Product Name</label>
+    <input id="productName" formControlName="productname" type="text" />
+    <div *ngIf="productForm.controls['productname'].touched && productForm.controls['productname'].hasError('required')">
+      <span>Product Name is required</span>
+    </div>
+    <div *ngIf="productForm.controls['productname'].touched && productForm.controls['productname'].hasError('minlength')">
+      <span>Product Name should be at least 3 characters</span>
+    </div>
+    <div *ngIf="productForm.controls['productname'].touched && productForm.controls['productname'].hasError('maxlength')">
+      <span>Product Name should be at most 50 characters</span>
+    </div>
+    <div *ngIf="productForm.controls['productname'].touched && productForm.controls['productname'].hasError('pattern')">
+      <span>Product Name should only contain alphabets</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="productPrice">Product Price</label>
+    <input id="productPrice" formControlName="productprice" type="text" />
+    <div *ngIf="productForm.controls['productprice'].touched && productForm.controls['productprice'].hasError('required')">
+      <span>Product Price is required</span>
+    </div>
+    <div *ngIf="productForm.controls['productprice'].touched && productForm.controls['productprice'].hasError('minlength')">
+      <span>Product Price should be at least 3</span>
+    </div>
+    <div *ngIf="productForm.controls['productprice'].touched && productForm.controls['productprice'].hasError('maxlength')">
+      <span>Product Price should be a 10digits</span>
+    </div>
+   
+  </div>
+
+  <div>
+    <label for="quantity">Quantity</label>
+    <input id="quantity" formControlName="quantity" type="number"/>
+    <div *ngIf="productForm.controls['quantity'].touched && productForm.controls['quantity'].hasError('required')">
+      <span>Quantity is required</span>
+    </div>
+    <div *ngIf="productForm.controls['quantity'].touched && productForm.controls['quantity'].hasError('minlength')">
+      <span>Quantity must be at least 1</span>
+    </div>
+    <div *ngIf="productForm.controls['quantity'].touched && productForm.controls['quantity'].hasError('maxlength')">
+      <span>Quantity can be at most 3</span>
+    </div>
+  </div>
+  <div>
+    <label for="totalPrice">Total Price</label>
+    <input id="totalPrice" formControlName="totalprice" type="text" readonly />
+  </div>
+  <div>
+    <label for="productCode">Product Code</label>
+    <input id="productCode" formControlName="productcode" type="text" />
+    <div *ngIf="productForm.controls['productcode'].touched && productForm.controls['productcode'].hasError('required')">
+      <span>Product Code is required</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="categoryid">Category</label>
+    <select id="categoryid" formControlName="categoryid">
+      <option *ngFor="let cat of category1" [value]="cat.categoryid">{{ cat.categoryname }}</option>
+    </select>
+    <div *ngIf="productForm.controls['categoryid'].touched && productForm.controls['categoryid'].hasError('required')">
+      <span>Category is required</span>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="productForm.invalid">Save</button>
+
+  <div *ngIf="errormessage">
+    <span>{{ errormessage }}</span>
+  </div>
+</form>
+
+<!-- Table to display inserted records -->
+<table border="1" *ngIf="product6.length > 0">
+  <thead>
+    <tr>
+      <th>Category Name</th>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th>Product Code</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of product6">
+      <td>{{ item.categoryname }}</td>
+      <td>{{ item.productname }}</td>
+      <td>{{ item.productprice }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.totalprice }}</td>
+      <td>{{ item.productcode }}</td>
+      <td>
+        <button class="btn edit" (click)="edit(item)">Edit</button>
+
+      </td>
+      <td>
+        <button class="btn Delete" (click)="Delete(item.productid)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
