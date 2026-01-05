@@ -115,7 +115,7 @@ this.productForm.patchValue(product);
  this.ds.Deleteproduct(id).subscribe((data:any)=>
 {
   Swal.fire('Deleted Product','Deleted Product Sucessfully','success');
-  this.getproducts();
+  // this.getproducts();
 })
     }
 }
